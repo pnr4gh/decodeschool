@@ -1,0 +1,191 @@
+{% extends 'decodeschool/base.html' %}
+{% load static %}
+{% block seo %}
+
+{% if chapter == "all" %}
+    {% if course.course_title == "C Programming" or course.course_title == "Problem Solving" %} 
+        <link rel="canonical" href="https://decodeschool.com/{{course.slug}}/full-text" />
+        <meta property="og:url" content="https://decodeschool.com/{{course.slug}}/full-text">
+    {% else %}
+        <link rel="canonical" href="https://decodeschool.com/{{course.slug}}/Examples" />
+        <meta property="og:url" content="https://decodeschool.com/{{course.slug}}/Examples">
+    {% endif %}
+{% else %}
+    
+        <link rel="canonical" href="https://decodeschool.com/{{chapter.course.slug}}/{{chapter.slug}}" />
+        <meta property="og:url" content="https://decodeschool.com/{{chapter.course.slug}}/{{chapter.slug}}">
+        
+{% endif %}
+
+	{% if chapter.chapter_title != None %}
+
+  	    <title>{{chapter.chapter_title}} in {{chapter.course.course_title}}  Examples | Decode School</title>
+        <meta property="og:title" content="{{chapter.chapter_title}} in {{chapter.course.course_title}}  Examples | Decode School">
+    
+    {% else %}
+        <title>{{course.course_title}} Examples | Decode School</title>
+        <meta property="og:title" content="{{course.course_title}} Examples | Decode School">
+    
+    {% endif %}
+    <meta name="description" content="Learn Syntax and Logic Building in Programming using our {{course.course_title}} {{chapter.course.course_title}} Examples and Explanations given in this page."/>
+       
+    <meta property="og:site_name" content="Decode School">
+	<meta property="og:url" content="https://www.decodeschool.com/">
+	<meta property="og:description" content="Learn Syntax and Logic Building in Programming using our {{course.course_title}} {{chapter.course.course_title}} Examples and Explanations given in this page.">
+	<meta property="og:type" content="article">
+	{% if chapter.featured_image %}
+	<meta property="og:image" content="https://decodeschool.com/media/{{chapter.featured_image}}" />
+	{% else %}
+	<meta property="og:image" content="https://decodeschool.com/media/{{chapter.course.featured_image}}{{course.featured_image}}" />
+	
+	{% endif %}
+	<meta property="og:image:width" content="448" /> 
+	<meta property="og:image:height" content="304" />
+	
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="entity_title">
+        {% if chapter == "all" %}
+            
+            {% if course.course_title == "C Programming" or course.course_title == "Problem Solving" %} 
+                <h1><a href="{% url 'course_detail_o' course.slug %}">{{course.course_title}} Examples</a></h1>
+            {% else %}
+                <h1><a href="{% url 'course_detail' course.slug %}">{{course.course_title}} Examples</a></h1>
+            {% endif %}
+        {% else %}
+            {% if chapter.course.course_title == "C Programming" or chapter.course.course_title == "Problem Solving" %} 
+                <h1 ><a href="{% url 'course_detail_o' chapter.course.slug %}" >{{chapter.course.course_title}} Examples</a></h1>
+            {% else %}
+                <h1 ><a href="{% url 'course_detail' chapter.course.slug %}" >{{chapter.course.course_title}} Examples</a></h1>
+            {% endif %}
+
+        {% endif %}
+    </div>
+    {% comment %}
+     <div class="text-muted">{{chapter.course.author}}</div>
+     
+     <div class="text-muted">{{course.author}}</div>
+     {% endcomment %}
+
+
+    <div class="entity_content">
+                   
+               
+        {% if chapter == "all" %}
+                           
+                           
+                <p>{{course.course_description|safe}}</p>
+                    
+                {% for chapter in course.chapter_set.all %}
+                    	
+                    <h4>{{chapter.chapter_title}}</h4>
+                    <p>{{chapter.reference|safe}}</p>
+                    <div class="row" style="margin-bottom:10px;">
+                    {% for program in chapter.program_set.all %}
+                       <div style="box-shadow: 5px 5px #e6e6e6; line-height:20px;padding:10px; text-align: left" class="col-md-6">
+                            <a  href="{%url 'program_detail' course=course.slug chapter=chapter.slug program=program.slug %}">{{program.program_title}}</a>
+                       </div>
+                                            
+                    {% endfor %}
+                    
+                    </div>
+                  
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+			        <ins class="adsbygoogle"
+     				style="display:block; text-align:center;"
+     				data-ad-layout="in-article"
+     				data-ad-format="fluid"
+     				data-ad-client="ca-pub-5181933327362047"
+     				data-ad-slot="2832571695"></ins>
+			        <script>
+     				    (adsbygoogle = window.adsbygoogle || []).push({});
+			        </script>
+                {% endfor %}
+                  
+
+                <p>{{course.reference|safe}}</p>
+                    
+                {% if course.exercise != None %}
+                    <h4 class="mt-2"> Exercise </h4>
+                    <p>{{course.exercise|safe}}</p>
+                {% endif %}
+                     
+        {% else %}
+                   
+                
+            <p>{{chapter.course.course_description|safe}}</p>
+                   
+            <h4>{{chapter.chapter_title}}</h4>
+            <p>{{chapter.reference|safe}}</p>
+                   
+            <div class="row" style="margin-bottom:10px;">
+                {% for program in chapter.program_set.all %}
+                   <div style="box-shadow: 5px 5px #e6e6e6; line-height:20px;padding:10px; text-align: left" class="col-md-6">
+                        <a  href="{%url 'program_detail' course=chapter.course.slug chapter=chapter.slug program=program.slug %}">{{program.program_title}}</a>
+                   </div>
+                                        
+                {% endfor %}
+                
+            </div>
+                    
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+		    <ins class="adsbygoogle"
+     	    style="display:block; text-align:center;"
+     		data-ad-layout="in-article"
+     		data-ad-format="fluid"
+     		data-ad-client="ca-pub-5181933327362047"
+    		data-ad-slot="2832571695"></ins>
+		    <script>
+     			(adsbygoogle = window.adsbygoogle || []).push({});
+			</script>
+            <p>{{chapter.course.reference|safe}}</p>
+            {% if course.exercise != None %}
+                    <h4 class="mt-2"> Exercise </h4>
+                    <p>{{course.exercise|safe}}</p>
+            {% endif %}
+        {% endif %}
+				                 
+
+                    
+
+                    
+        
+    </div>
+
+			
+	
+	 
+{% endblock %}
+
+{% block right%}
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5181933327362047"
+crossorigin="anonymous"></script>
+<!-- Rsidebar -->
+<ins class="adsbygoogle"
+style="display:block"
+data-ad-client="ca-pub-5181933327362047"
+data-ad-slot="2089501518"
+data-ad-format="auto"
+data-full-width-responsive="true"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5181933327362047"
+     crossorigin="anonymous"></script>
+<!-- Rsidebar -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-5181933327362047"
+     data-ad-slot="2089501518"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+{% endblock %}

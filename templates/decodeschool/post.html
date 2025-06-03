@@ -1,0 +1,141 @@
+{% extends 'decodeschool/base.html' %}
+{% load custom_tags %}
+{% load static %}
+{% block seo %}
+
+	<link rel="canonical" href="https://decodeschool.com/blog/{{post.blog.slug}}/{{post.slug}}" />
+  	<title> {{post.post_title}} | {{post.blog.blog_name}} | Decode School</title>
+	<meta name="description" content="This is the interesting post about {{post.post_title}}"/>
+	<meta property="og:title" content="{{post.post_title}} | {{post.blog.blog_name}} | Decode School">
+	<meta property="og:site_name" content="Decode School">
+	<meta property="og:url" content="https://www.decodeschool.com/blog/{{post.blog.slug}}/{{post.slug}}">
+	<meta property="og:description" content="This is the interesting post on {{post.post_title}}">
+	<meta property="og:type" content="article">
+	<meta property="og:image" content="https://decodeschool.com/media/{{post.featured_image}}" />
+	<meta property="og:image:width" content="448" /> 
+	<meta property="og:image:height" content="304" />
+
+
+{% endblock %}
+{% block content %}
+
+
+
+
+<div class="entity_title">
+	                     
+	<h1>{{post.post_title}}</h1>
+
+</div>
+{% comment %}
+						<div class="text-muted">{{post.blog.author}}</div>
+						{% endcomment %}				
+<div class="entity_content"> 
+					
+					<p class="small mb-2" style="color:grey;">{{post.posted_on}} | {{post.blog.blog_name}} </p>
+						
+					 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+					<ins class="adsbygoogle"
+     						style="display:block; text-align:center;"
+     						data-ad-layout="in-article"
+     						data-ad-format="fluid"
+     						data-ad-client="ca-pub-5181933327362047"
+    		 				data-ad-slot="2832571695">
+    		 			</ins>
+					<script>
+     						(adsbygoogle = window.adsbygoogle || []).push({});
+					</script>
+					
+					{{post.post_body | safe}}
+					
+									    	 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+					<ins class="adsbygoogle"
+     						style="display:block; text-align:center;"
+     						data-ad-layout="in-article"
+     						data-ad-format="fluid"
+     						data-ad-client="ca-pub-5181933327362047"
+    		 				data-ad-slot="2832571695">
+    		 			</ins>
+					<script>
+     						(adsbygoogle = window.adsbygoogle || []).push({});
+					</script>
+	    
+					
+			    <nav class="blog-nav nav nav-justified my-2">
+					{% if prev %}
+				    	<a class="nav-link-prev nav-item nav-link rounded-left" href="{% url 'post_detail' blog=prev.blog.slug post=prev.slug %}">Previous<i class="arrow-prev fas fa-long-arrow-alt-left"></i></a>
+					{% endif %}
+					{% if next %}
+						<a class="nav-link-next nav-item nav-link rounded-right" href="{% url 'post_detail' blog=next.blog.slug post=next.slug %}">Next<i class="arrow-next fas fa-long-arrow-alt-right"></i></a>
+					{% endif %}
+				</nav>
+				<h4>Comments</h4>
+				<p style="color:red">{{message}}</p>
+			
+				{% for comment in post.comment_set.all %}
+					<div class="row" style="padding-top:10px">
+						<h5>{{comment.commented_by}}</h5>
+						{{comment.comment}}
+					</div>
+					
+				{% endfor %}
+			
+				<form method="post" style="margin-top:30px">
+					{% csrf_token %}
+					{{c_form.as_p}}
+					<input type="submit">
+				</form>
+</div>			
+		    
+	   
+	    
+	   				<div class="row">
+					<div class="col-lg-6">
+						<h2 class="title">Related Posts</h2>
+						<ul class="list-group list-unstyled">
+							{% for po in post.blog.post_set.all %}
+								{% if po.id != post.id %}
+				   			
+				        			<li><a href="{% url 'post_detail' blog=post.blog.slug post=post.slug %}">{{post.post_title}}</li></a>
+							
+								{% endif %}
+							{% endfor %}
+						</ul>
+					</div>
+					</div>
+		
+	    
+	    
+    
+{% endblock %}
+{% block right%}
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5181933327362047"
+crossorigin="anonymous"></script>
+<!-- Rsidebar -->
+<ins class="adsbygoogle"
+style="display:block"
+data-ad-client="ca-pub-5181933327362047"
+data-ad-slot="2089501518"
+data-ad-format="auto"
+data-full-width-responsive="true"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5181933327362047"
+     crossorigin="anonymous"></script>
+<!-- Rsidebar -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-5181933327362047"
+     data-ad-slot="2089501518"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+{% endblock %}	    

@@ -1,0 +1,76 @@
+{% extends 'decodeschool/base.html' %}
+{% load static %}
+{% block seo %}
+
+	<link rel="canonical" href="https://decodeschool.com/blog/{{blog.slug}}" />
+
+  	<title> A {{blog.blog_name}} Blog | A {{blog.blog_name}} Tutorial | Decode School</title>
+   
+    <meta name="description" content="This blog has various posts or tutorials in {{blog.blog_name}}"/>
+   
+	<meta property="og:title" content="A {{blog.blog_name}} Blog | A {{blog.blog_name}} Tutorial | Decode School">
+	<meta property="og:site_name" content="Decode School">
+	<meta property="og:url" content="https://decodeschool.com/blog/{{blog.slug}}">
+	<meta property="og:description" content="This blog has various posts about {{blog.blog_name}}">
+	<meta property="og:type" content="article">
+	<meta property="og:image" content="https://decodeschool.com/{%static 'assets/images/banner1.jpg' %}" />
+	<meta property="og:image:width" content="448" /> 
+	<meta property="og:image:height" content="304" />
+	
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="entity_title">
+	                     
+		<h1 class="mb-3">{{blog.blog_name}}</h1>
+
+</div>
+<div class="entity_content">   
+
+		
+
+		<div class="row">
+			{% for post in blog.post_set.all %}
+			   <div style="box-shadow: 5px 5px #e6e6e6; line-height:20px;padding:10px; text-align: left" class="col-md-6">
+				<a style="color:#337ab7;" href="{%url 'post_detail' blog=blog.slug post=post.slug %}">{{post.post_title}}</a>
+			   </div>
+									
+			{% endfor %}
+			
+			</div>
+			
+		
+        
+             
+                
+                 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+					<ins class="adsbygoogle"
+     						style="display:block; text-align:center;"
+     						data-ad-layout="in-article"
+     						data-ad-format="fluid"
+     						data-ad-client="ca-pub-5181933327362047"
+    		 				data-ad-slot="2832571695">
+    		 			</ins>
+					<script>
+     						(adsbygoogle = window.adsbygoogle || []).push({});
+					</script>
+	      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+					<ins class="adsbygoogle"
+     						style="display:block; text-align:center;"
+     						data-ad-layout="in-article"
+     						data-ad-format="fluid"
+     						data-ad-client="ca-pub-5181933327362047"
+    		 				data-ad-slot="2832571695">
+    		 			</ins>
+					<script>
+     						(adsbygoogle = window.adsbygoogle || []).push({});
+					</script>
+</div>   	    
+                        
+
+    
+	 
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends '../base.html' %}
+
+
+{% load static %}
+{% block content %} 
+
+								<div class="kt-portlet kt-portlet--height-fluid">
+									<div class="kt-portlet__body">
+										
+                                        <div class="kt-pricing-1__items row">
+                                            <div class="kt-pricing-1__item col-lg-12 bg-blue">
+                                             
+                                                <div class="kt-portlet">
+                                                    <div class="container">
+<h6>Assessments & Surveys</h6>
+
+<ul>
+  
+  {% for article in object_list %}
+  
+        <div class="row">
+                <div class="col s12">
+                  <div class="card new">
+                    <div class="card-content black-text">
+                      <span class="card-title">{{ article.name }}</span>
+                      
+                    </div>
+                    
+                    
+                      <ul class="collection">
+                       
+                          <li class="collection-item "><a  href="{% url 'quiz-detail' article.id %}">Take Test</a></li>
+                        
+
+                      </ul>
+                     
+                      
+                    
+                  </div>
+                </div>
+              </div>
+
+
+{% empty %}
+    <li>No Quizes</li>
+{% endfor %}
+</ul>
+
+</div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-lg-6 pull-left">
+                                                        <div class="kt-pricing-1__btn">
+                                                            <button type="button" class="btn btn-brand btn-wide btn-bold btn-upper">Previous</button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 " style="text-align: right;">
+                                                        <div class="kt-pricing-1__btn">
+                                                            <button type="button" class="btn btn-brand btn-wide btn-bold btn-upper">Next</button>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                       
+                                           
+                                        </div>
+									</div>
+								</div>
+							
+						{% endblock %}
+

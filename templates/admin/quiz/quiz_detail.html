@@ -1,0 +1,200 @@
+{% extends '../base_2.html' %}
+{% load multioptions_tags %}
+{% load materializecss %}
+
+
+
+{% load static %}
+
+{% block style %}
+
+<style>
+
+		
+				
+			
+				
+		
+			.option p{
+			   display: inline;
+		
+				   margin-left: 20px;
+			 };
+		
+			
+		</style>
+		{% endblock %}
+
+
+
+                         {% block content %} 
+								<div class="kt-portlet kt-portlet--height-fluid">
+									<div class="kt-portlet__body">
+                                        <div class="kt-pricing-1__items row">
+                                            <div class="kt-pricing-1__item col-lg-12 bg-blue">
+												<div class="row mb-2">
+													<div class="col-lg-6">
+															<h3>{{ quiz.name }}</h3>
+													</div>
+
+													<div class="col-lg-6">
+															<button class="btn  btn-dark btn-wide btn-bold float-right" type="submit" id="quizdetail">
+																	Submit All and Finish
+																</button>
+													</div>
+												</div>
+													
+													
+													
+													{% for assignment in page_obj %}
+                                                <div class="kt-portlet">
+                                                    
+                                                    <div class="kt-portlet__body">
+        
+                                                        <!--begin::Form-->
+                                                        <form class="kt-form ">
+                                                            <div class="form-group ">
+																<label class="txt-black-font-18">{{ assignment.Question.description | safe }}</label>
+																
+																{% if  assignment.Question.id|checkmultioption %}
+																
+
+                                                                 <div class="kt-checkbox-list answer-section"> 
+																	{% for option in assignment.Question.options %}
+																	
+																
+                                                                     <label style="color:black;" class="kt-checkbox kt-checkbox--success">
+                                                                        <input  name="radio5" assignment="{{assignment.id}}"
+																		question="{{assignment.Question.id}}" quiz="{{quiz.id}}"
+																		option="{{option.id}}" type="checkbox"
+																		value="{{assignment.Question.id|add:option.id}}"> 
+																		 {{option.name | safe }}<span></span>
+																		
+                                                                     </label>
+																	{% endfor %}
+																  </div>
+																{% else %}
+
+																<div class="kt-radio-list answer-section"> 
+																		{% for option in assignment.Question.options %}
+																	
+																		 <label style="color:black;" class="kt-radio kt-radio--success">
+																			<input  name="radio5" assignment="{{assignment.id}}"
+																			question="{{assignment.Question.id}}" quiz="{{quiz.id}}"
+																			option="{{option.id}}" type="radio"
+																			value="{{assignment.Question.id|add:option.id}}"> 
+																			 {{option.name | safe }}<span></span>
+																			
+																		 </label>
+																		{% endfor %}
+																	  </div>
+																 
+
+																 
+																{% endif %} 
+                                                            </div>
+                                                         
+                                                        
+                                                        
+                                                        </form>
+        
+                                                        <!--end::Form-->
+                                                    </div>
+												</div>
+												{% endfor %}
+												{% csrf_token %}
+
+                                                <div class="row">
+                                                    <div class="col-lg-4 pull-left">
+                                                        <div class="kt-pricing-1__btn">
+																{% if page_obj.has_previous %} <a href="?page={{ page_obj.previous_page_number }}">
+																   <button type="button" class="btn btn-dark btn-wide btn-bold btn-upper">Previous</button></a>
+																{% else %}
+																	<button type="button" class="btn btn-wide btn-bold" style="background-color:#D8D6D6;" disabled>Previous</button>
+																{% endif %}
+																{% if page_obj.has_next %}  <a href="?page={{ page_obj.next_page_number }}">
+																	<button type="button" class="btn btn-dark btn-wide btn-bold btn-upper">Next</button></a>
+																{% else %}
+																	<button type="button" class="btn btn-wide btn-bold" style="background-color: #D8D6D6;" disabled>Next</button>
+																{% endif %}
+														</div>
+														
+														
+                                                    </div>
+                                                    <div class="col-lg-8 ">
+														<div class="row">
+																<div class="col-lg-8 ">
+																		<div class="kt-pricing-1__btn">
+																				<ul class="m-2" style="list-style-type:none;">
+																						{% for assignments in assign  %} 
+																							<li style="display: inline-block;">
+																								<a style="display:block;width:30px; color: black;background: white; border: 3px solid #017669; border-radius: 50%;text-align: center;" href="?page={{ forloop.counter }}" questionid="{{assignments.Question.id}}" >   {{ forloop.counter }} </a>
+																							</li>
+																						   {% endfor %}
+																					</ul>
+																				
+																		</div>
+																</div>
+																<div class="col-lg-4 ">
+																		<ul class="m-2" style="list-style-type:none;">
+																		<li>
+																				<a style="display:inline-block;width:30px; color: white;background: white; border: 3px solid #017669; border-radius: 50%;text-align: center;">U</a> Un Answered
+																		</li>
+
+																		<li>
+																				<a style="display:inline-block;width:30px; color: grey;background: grey;  border: 3px solid #017669; border-radius: 50%;text-align: center;">A</a> Answered
+																		</li>
+																		</ul>
+																</div>
+														</div>
+                                                       
+														<br>
+														
+														
+													</div>
+													
+                                                </div>
+                                                
+                                            </div>
+                                       
+                                           
+                                        </div>
+									</div>
+								</div>
+							
+
+								<script>
+
+
+										$('input').change(function(){
+										var value = $( "input:checked" ).attr("question");
+										g=parseInt($( "input:checked" ).attr("question"));
+										
+										$("a[questionid="+g +"]").css({"background":"gray"});
+									
+										});
+									
+									  
+									
+									//if answer selected change color to green
+									
+										var quizarray = JSON.parse(localStorage.getItem("quizarray"));
+									   
+										
+									
+									
+										var lim = quizarray.length;
+										
+										for (var i = 0; i < lim; i++) {
+										  
+											$("a[questionid="+ quizarray[i].questionid +"]").css({"background":"gray"});
+										}
+										
+										
+										</script>
+
+								
+								{% block scripts %}
+								<script type="text/javascript" src="{% static '/js/quiz_detail.js' %}"></script>
+								{% endblock %}
+								{% endblock %}

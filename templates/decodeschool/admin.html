@@ -1,0 +1,191 @@
+{% extends 'decodeschool/base.html' %}
+{% load static %}
+{% block seo %}
+
+	  	<title> Dashboard</title>
+   
+{% endblock %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+{% block content %}
+
+<div class="entity_title">
+	                     
+		<h1 class="mb-3">Welcome  "{{user.username}}"</h1>
+
+</div>
+
+
+<div class="entity_content">  
+	
+	<ul class="nav nav-tabs" role="tablist">
+		<li class="nav-item">
+			<a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">Overall</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Assignments</a>
+		</li>
+		
+	</ul><!-- Tab panes -->
+	<div class="tab-content">
+		<div class="tab-pane active" id="tabs-1" role="tabpanel">
+			<div class="container">
+		
+				<div class="row">
+		
+					{% if user.is_superuser %}
+					<div class="col-sm-3 bg-success" style="padding:10px; height:100px;">
+						<h6 >Leet Code Problem Set</h6>
+						<a class="btn btn-primary" href="{% url 'getproblems' %}">Get Updates</a>
+					</div>
+					
+					<div class="col-sm-3 bg-info" style="padding:10px;  height:100px;">
+						<h6 >Enroll Students</h6>
+						<form method="post" id="uploadform" enctype="multipart/form-data" data_url="{% url 'upload_students' %}">
+							{% csrf_token %}
+							<input type="file" name="excel_file">
+							<button class="btn-primary" type="submit">Import</button>
+						</form>
+					</div>
+		
+					<div class="col-sm-6 bg-success" style="padding:10px;  height:100px;">
+						
+		
+					{% else %}
+					<div class="col-sm-12 bg-success" style="padding:10px;  height:100px;">
+					{% endif %}
+					<h6 >Filters</h6>
+						
+					<select id="institute" style=" width: 100%;
+					padding: 12px 20px;
+					margin: 8px 0;
+					display: inline-block;
+					border: 1px solid #26b6f8;
+					border-radius: 4px;
+					box-sizing: border-box;">
+						<option value="*">Institute</option>
+						{% for institute in institutions %}
+							<option value="{{institute.id}}">{{institute.name}}</option>
+						{% endfor %}
+					</select>
+				</div>
+					
+				</div>
+					
+					
+					
+			
+		
+				<table class="table">
+					<thead class="table-active">
+						<tr>
+							<th scope="col">Name</th>
+							<th scope="col">Institution</th>
+							<th scope="col">UserName</th>
+							<th scope="col">solved</th>
+							<th scope="col">Easy</th>
+							<th scope="col">Medium</th>
+							<th scope="col">Hard</th>
+							<th scope="col">Last Update</th>
+						</tr>
+					</thead>
+					<tbody id="profile_list">
+						{% for profile in profiles %}
+						  <tr>
+							<td>{{profile.user.first_name}} {{profile.user.last_name}}</td>
+							<td>{{profile.institute}}</td>
+							<td><a href="{% url 'get_lc_problems' profile.user.username %}" target="_blank">{{profile.get_leetcode_username}}</a></td>
+							<td>{{profile.get_count}}</td>
+							<td>{{profile.get_easy_count}}</td>
+							<td>{{profile.get_medium_count}}</td>
+							<td>{{profile.get_hard_count}}</td>
+							<td>{{profile.get_leetcode_last_update}}</td>
+						  </tr>
+						{% endfor %}
+					</tbody>
+				  </table>
+			</div>
+						
+					
+		</div>
+		<div class="tab-pane" id="tabs-2" role="tabpanel">
+			<div class="container">
+
+				<div class="row">
+					<div class="col-sm-3 bg-success" style="padding:10px;  height:100px;">
+					
+						<select id="assignment" style=" width: 100%;
+							padding: 12px 20px;
+							margin: 8px 0;
+							display: inline-block;
+							border: 1px solid #26b6f8;
+							border-radius: 4px;
+							box-sizing: border-box;">
+							<option value="*">Assignment</option>
+							{% for assignment in assignments %}
+								<option value="{{assignment.id}}">{{assignment.name}}</option>
+							{% endfor %}
+						</select>
+						
+					</div>
+
+					<div class="col-sm-3 bg-info" style="padding:10px;  height:100px;">
+
+						<select id="institute_a" style=" width: 100%;
+							padding: 12px 20px;
+							margin: 8px 0;
+							display: inline-block;
+							border: 1px solid #26b6f8;
+							border-radius: 4px;
+							box-sizing: border-box;">
+							<option value="*">Institute</option>
+							{% for institute in institutions %}
+								<option value="{{institute.id}}">{{institute.name}}</option>
+							{% endfor %}
+						</select>
+					</div>
+					
+					<div class="col-sm-3 bg-success" style="padding:10px;  height:100px;">
+					
+						<select id="course_a" style=" width: 100%;
+							padding: 12px 20px;
+							margin: 8px 0;
+							display: inline-block;
+							border: 1px solid #26b6f8;
+							border-radius: 4px;
+							box-sizing: border-box;">
+							<option value="*">Course</option>
+							{% for course in courses_a %}
+								<option value="{{course.id}}">{{course.course_title}}</option>
+							{% endfor %}
+						</select>
+					</div>
+					
+					
+					<div class="col-sm-3 bg-info" style="padding:10px;  height:100px;">
+						<button class="btn-primary" id="filterassign" style=" width: 100%;
+						padding: 12px 20px;
+						margin: 8px 0;
+						display: inline-block;
+						border: 1px solid #26b6f8;
+						border-radius: 4px;
+						box-sizing: border-box;" data_url="{% url 'filter_assignment' %}">Filter</button>
+					</div>
+				</div>
+				<table class="table" id="assign_table">
+					
+				</table>
+
+
+
+			</div>
+		</div>
+		
+	</div>
+	    
+</div>   	    
+
+
+	 
+{% endblock %}
+

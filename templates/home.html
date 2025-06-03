@@ -1,0 +1,10 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        {%for course in courses %}
+        <a href="{% url 'course_detail' course.course_title %}">{{course.course_title}}</a>
+        {% endfor %}
+    </body>
+</html>

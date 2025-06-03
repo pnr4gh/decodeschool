@@ -1,0 +1,105 @@
+{% extends 'decodeschool/base.html' %}
+{% load static %}
+{% block seo %}
+
+	<link rel="canonical" href="https://decodeschool.com/" />
+
+  	<title>Decode School | Programming Examples | Problem Solving | Online Training</title>
+   
+    <meta name="description" content="Learn Programming and Problem Solving with decode school Programming Examples, Tutorials and Courses."/>
+   
+	<meta property="og:title" content="Decode School | Programming Examples | Problem Solving | Online Training">
+	<meta property="og:site_name" content="Decode School">
+	<meta property="og:url" content="https://www.decodeschool.com/">
+	<meta property="og:description" content="Learn Programming and Problem Solving with decode school Programming Examples, Tutorials and Courses.">
+	<meta property="og:type" content="article">
+	<meta property="og:image" content="https://decodeschool.com/{%static 'assets/images/banner1.jpg' %}" />
+	<meta property="og:image:width" content="448" /> 
+	<meta property="og:image:height" content="304" />
+	
+
+{% endblock %}
+
+{% block content %}
+
+
+<div class="entity_title">
+	<h1>Programming Tutorials & Examples</h1>
+</div>
+	
+<div class="category_section tablet">
+	<div class="category_article_wrapper">
+		<div class="row display-flex" >
+
+						
+			{% for course in courses %}
+				<div class="col-md-6">
+					<div class="category_article_body">
+						<div class="category_article_title">
+								{% if course.course_title == "C Programming" or course.course_title == "Problem Solving" %} 
+									<h4 ><a href="{% url 'course_detail_o' course.slug %}">{{course.course_title}}</a></h4>
+								{% else %}
+									<h4 ><a href="{% url 'course_detail' course.slug %}">{{course.course_title}}</a></h4>
+								{% endif %}
+						</div>
+						{% comment %}
+						<div class="text-muted">{{course.author}}</div>
+						{% endcomment %}
+						<div class="category_article_content">
+										 
+								{% for chapter in course.chapter_set.all %}
+									<a href="{% url 'chapter_detail' course=course.slug chapter=chapter.slug %}">{{chapter.chapter_title}}</a> 
+								  {% endfor %}	
+						</div>
+									
+					</div>		
+
+				</div>
+				
+			{% endfor %}
+
+	
+
+		
+		
+			<!-- Blog Posts-->
+
+			{% for blog in blogs %}
+				<div class="col-md-6">
+					<div class="category_article_body">
+						<div class="category_article_title">
+					
+							<h4><a href="{% url 'blog_detail' blog.slug %}">{{blog.blog_name}}</a></h4>
+						</div>
+						{% comment %}
+						<div class="text-muted">{{blog.author}}</div>
+						{% endcomment %}
+						<div class="category_article_content">		
+										 
+							{% for post in blog.post_set.all %}
+								<a href="{% url 'post_detail' blog=blog.slug post=post.slug %}">{{post.post_title}}</a> 
+	                      	{% endfor %}			
+						</div>
+					</div>
+				</div>
+				
+			{% endfor %}
+
+		</div>
+	
+
+
+	</div>
+
+
+</div>	
+	
+		
+
+		
+	
+
+
+				
+{% endblock %}
+

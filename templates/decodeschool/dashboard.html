@@ -1,0 +1,76 @@
+{% extends 'decodeschool/base.html' %}
+{% load static %}
+{% block seo %}
+
+	  	<title> Dashboard</title>
+   
+{% endblock %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+{% block content %}
+
+<div class="entity_title">
+	                     
+		<h1 class="mb-3">Welcome  "{{user.username}}"</h1>
+
+</div>
+<div class="entity_content">   
+
+		<div class="container">					
+		<table>
+			<tr>
+				<th style="padding-left:20px">Platform</th>
+				<th style="padding-left:20px">User Name</th>
+				<th style="padding-left:20px">Updated on</th>
+				<th style="padding-left:20px">Update</th>
+			</tr>
+			{% for handle in user_handles %}
+			<tr>
+				<td style="padding-left:20px">{{handle.platform.name}}</td>
+				<td style="padding-left:20px">{{handle.user_handle}}</td>
+				<td style="padding-left:20px">{{handle.last_update}}</td>
+				<td style="padding-left:20px"><a id="lc_update" href="#" url="{{handle.user_handle}}" class="btn btn-primary">Update</a></td>
+			</tr>
+			{% endfor %}
+		</table>
+		
+
+
+		
+		<h5 style="margin-top:20px">Solved Problem Stats</h5>
+		
+		<table class="table">
+			<thead class="table-active">
+				<tr>
+					<th scope="col">Platform</th>
+					<th scope="col">Username</th>
+					<th scope="col">solved</th>
+					<th scope="col">Easy</th>
+					<th scope="col">Medium</th>
+					<th scope="col">Hard</th>
+					<th scope="col">Last Update</th>
+				</tr>
+
+			</thead>
+			<tbody>
+				<tr>
+					<td>Leet Code</td>
+					<td><a href="{% url 'get_lc_problems' profile.user.username %}" target="_blank">{{profile.get_leetcode_username}}</a></td>
+					<td>{{profile.get_count}}</td>
+					<td>{{profile.get_easy_count}}</td>
+					<td>{{profile.get_medium_count}}</td>
+					<td>{{profile.get_hard_count}}</td>
+					<td>{{profile.get_leetcode_last_update}}</td>
+				</tr>
+			</tbody>
+		</table>
+		</div>
+       
+                
+                
+</div>   	    
+
+
+	 
+{% endblock %}
+

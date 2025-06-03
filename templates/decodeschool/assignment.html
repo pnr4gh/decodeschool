@@ -1,0 +1,37 @@
+{% load custom_tags %} 
+<thead class="table-active">
+    <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Institution</th>
+        <th scope="col">UserName</th>
+        <th scope="col">Solved ({{assignment_problems|length}})</th>
+        {% for assignment_problem in assignment_problems %}
+            <th scope="col">{{assignment_problem.problem.problem_title}}</th>
+        {% endfor %}
+        <th scope="col">Last Update</th>
+    </tr>
+</thead>
+<tbody>
+    {% for profile in profiles %}
+    <tr>
+        <td>{{profile.user.first_name}} {{profile.user.last_name}} </td>
+        <td>{{profile.institute.name}}</td>
+        <td>{{profile.get_leetcode_username}}</td>
+        <td>{{profile.user|no_of_problems:assignment_id}}</td>
+        {% for assignment_problem in assignment_problems %}
+        <td>
+            
+            {% if profile.user|is_solved:assignment_problem.problem.id %}
+                Yes
+            {% else %}
+                No
+            {% endif %}
+        
+        
+        
+        </td>
+        {% endfor %}
+        <td>{{profile.get_leetcode_last_update}}</td>
+    </tr>
+    {% endfor %}
+</tbody>

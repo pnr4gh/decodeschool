@@ -1,0 +1,55 @@
+{% extends 'decodeschool/base.html' %}
+{% load static %}
+{% block seo %}
+
+	  	<title> Dashboard</title>
+   
+{% endblock %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+{% block content %}
+
+<div class="entity_title">
+	                     
+		<h1 class="mb-3">List of Problems</h1>
+
+</div>
+<div class="entity_content">   
+	<div class="container">
+		
+			
+	
+
+		<table class="table">
+			<thead class="table-active">
+				<tr>
+					<th scope="col">Problem</th>
+					<th scope="col">Complexity</th>
+					<th scope="col">Topics</th>
+							</tr>
+			</thead>
+			<tbody id="profile_list">
+				{% for problem in solved_problems %}
+			  	<tr>
+					<td>{{problem.problem.problem_title}}</td>
+					<td>{{problem.problem.complexity}}</td>
+					<td>
+                    {% for problemtag in problem.problem.problemtags_set.all  %}
+                        {{problemtag.topictags}},
+                      {% endfor %} 
+
+                    </td>
+					
+			  	</tr>
+				{% endfor %}
+			</tbody>
+		  </table>
+    </div>
+                
+                
+</div>   	    
+
+
+	 
+{% endblock %}
+

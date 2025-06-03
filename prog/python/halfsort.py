@@ -1,0 +1,10 @@
+l=list(map(int,input("Enter Numbers:").split()))
+for i in range(0,len(l)-1):
+    for j in range(0,len(l)//2-1):
+        if(l[j+1]<l[j]):
+            l[j],l[j+1]=l[j+1],l[j]
+    for j in range(len(l)//2,len(l)-1):
+        if(l[j+1]>l[j]):
+            l[j],l[j+1]=l[j+1],l[j]
+            
+print(l)

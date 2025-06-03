@@ -1,0 +1,10 @@
+{% extends 'decodeschool/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+  <h2>Sign up</h2>
+  <form method="post" class="bg-info" style="width:75%; padding:10px; border-radius:10px; box-shadow: 5px 5px 5px rgb(231, 231, 231);">
+    {% csrf_token %}
+    {{ form | crispy }}
+    <button class="btn-primary" type="submit">Sign up</button>
+  </form>
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends 'quiz/base.html' %}
+{% load materializecss %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+    <h5>{{ quiz.name }}</h5>
+    <p>{{quiz.type}}</p>
+
+        <div class="row">
+         
+                {% for assignment in page_obj %}
+
+                <div class="row">
+                    <div class="col s12 m6 ab">
+                        <div class="card">
+                            
+                                <span class="card-title">{{ assignment.Question.description | safe }}</span>
+                          
+                            <ul>
+
+                                {% for option in assignment.Question.options %}
+                                <li>
+                                    <p>
+                                        
+                                            <span> {{option.name | safe}}</span>
+                                        </label>
+                                    </p>
+                                </li>
+                                {% endfor %}
+                                {% for option1 in assignment.Question.answers %}
+                                <label>Answer :  <span> {{option1.name | safe}}</span> </label>
+                        
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+                {% endfor %}
+                {% csrf_token %}
+                <div>
+                    <ul class="pagination" style="float:right">
+                        {% if page_obj.has_previous %}
+                            <li style="background-color: dodgerblue; " class="waves-effect"><a href="?page={{ page_obj.previous_page_number }}" style="color:white;"> &lt;&lt;Previous</a></li>
+                        {% endif %}
+                    
+                        {% if page_obj.has_next %}
+                            <li style="background-color: dodgerblue; " class="waves-effect"><a href="?page={{ page_obj.next_page_number }}" style="color:white;">Next &gt;&gt;</a></li>
+                        {% endif %}
+                    </ul>
+                </div>                  
+            
+        </div>
+</div>
+
+{% endblock %}
+{% block scripts %}
+<script type="text/javascript" src="{% static "/js/quiz_detail.js" %}"></script>
+{% endblock %}

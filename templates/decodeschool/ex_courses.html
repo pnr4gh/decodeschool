@@ -1,0 +1,91 @@
+{% extends 'decodeschool/base.html' %}
+{% load static %}
+{% block seo %}
+
+<link rel="canonical" href="https://decodeschool.com/" />
+
+  	<title>Free Certification Courses | Decode School | Technology Trainer | Online Training</title>
+   
+    <meta name="description" content="Learn Programming and Problem Solving with decode school Programming Examples and Posts."/>
+   
+	<meta property="og:title" content="Decode School | Technology Trainer | Online Training">
+	<meta property="og:site_name" content="Decode School">
+	<meta property="og:url" content="https://www.decodeschool.com/">
+	<meta property="og:description" content="Learn Programming and Problem Solving with decode school Programming Examples and Posts.">
+	<meta property="og:type" content="article">
+	<meta property="og:image" content="{%static 'assets/images/banner1.jpg' %}" />
+	<meta property="og:image:width" content="448" /> 
+	<meta property="og:image:height" content="304" />
+
+
+
+
+{% endblock %}
+
+{% block content %}
+<div class="container">
+
+<ul class="tags list-unstyled list-inline mt-2">
+
+						<li class="list-inline-item border border-light pb-1 px-1 m-1"><a class="small" href="{%url 'home' %}">Home</a></li>
+						<li class="list-inline-item border border-light pb-1 px-1 m-1"><a class="small" href="{%url 'course_detail' 'Python-Programming' %}">Python Examples</a></li>
+						<li class="list-inline-item border border-light pb-1 px-1 m-1"><a class="small" href="{% url 'blog_detail' 'python' %}">Python Tutorial</a></li>
+						<li class="list-inline-item border border-light pb-1 px-1 m-1"><a class="small" href="{%url 'course_detail_o' 'C-Programming' %}">C Examples</a></li>
+						<li class="list-inline-item border border-light pb-1 px-1 m-1"><a class="small" href="{%url 'course_detail_o' 'Problem-Solving' %}">C Problems</a></li>
+						<li class="list-inline-item border border-light pb-1 px-1 m-1"><a class="small" href="{%url 'course_detail' 'Java-Programming' %}">Java Examples</a></li>
+						
+					</ul>
+					
+					
+<h1 class="my-5 h3 mx-2">
+{% with courses|first as course1 %}
+    {{ course1.sponsor.title }}
+{% endwith %}
+
+
+</h1>
+{% for course in courses %}
+	<div class="row m-2">
+		
+		<h3>{{course.name}}
+			{% if course.certification != True %}
+				(No Certificate)
+			{% endif %}
+		
+		</h3>
+	</div>
+		<p class="m-2">{{course.highlights}}</p> 
+	<div class="row m-2">
+		<a class="float-right btn btn-primary" target="_blank" href="{{course.link}}">Take me to Course</a>
+		
+	</div>
+	<hr>
+
+{% endfor %}
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+					<ins class="adsbygoogle"
+     						style="display:block; text-align:center;"
+     						data-ad-layout="in-article"
+     						data-ad-format="fluid"
+     						data-ad-client="ca-pub-5181933327362047"
+    		 				data-ad-slot="2832571695">
+    		 			</ins>
+					<script>
+     						(adsbygoogle = window.adsbygoogle || []).push({});
+					</script>
+					
+					<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+					<ins class="adsbygoogle"
+     						style="display:block; text-align:center;"
+     						data-ad-layout="in-article"
+     						data-ad-format="fluid"
+     						data-ad-client="ca-pub-5181933327362047"
+    		 				data-ad-slot="2832571695">
+    		 			</ins>
+					<script>
+     						(adsbygoogle = window.adsbygoogle || []).push({});
+					</script>
+					
+</div>
+{% endblock %}

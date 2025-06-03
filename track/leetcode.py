@@ -1,0 +1,13 @@
+import leetcode
+
+def connect():
+    leetcode_session = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfYXV0aF91c2VyX2lkIjoiODI4MTc2NSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImFsbGF1dGguYWNjb3VudC5hdXRoX2JhY2tlbmRzLkF1dGhlbnRpY2F0aW9uQmFja2VuZCIsIl9hdXRoX3VzZXJfaGFzaCI6IjkwYTAxYWU0YzI1YTVlZjBlOTdmYjk2NDZlODRhMGM4YjQ4ZGRhZmU0YjRiMWU1MjA4MGY1NDk2YTNlMTkwYWQiLCJpZCI6ODI4MTc2NSwiZW1haWwiOiJsZXR0ZXJzNHJhbWVzaEBnbWFpbC5jb20iLCJ1c2VybmFtZSI6ImxldHRlcnM0cmFtZXNoIiwidXNlcl9zbHVnIjoibGV0dGVyczRyYW1lc2giLCJhdmF0YXIiOiJodHRwczovL2Fzc2V0cy5sZWV0Y29kZS5jb20vdXNlcnMvYXZhdGFycy9hdmF0YXJfMTY3MTQ2MTMwNS5wbmciLCJyZWZyZXNoZWRfYXQiOjE3MDI3MDA5NDksImlwIjoiMTAzLjEzMC45MC4yMTAiLCJpZGVudGl0eSI6IjljMWNlMjdmMDhiMTY0NzlkMmUxNzc0MzA2MmIyOGVkIiwic2Vzc2lvbl9pZCI6NTE3MzcyODR9.qtcFagDsd0K4XBOSSCVXyWz5Pj8yXaOKhabILNIqLCg"
+    csrf_token = "a0Am8q6DaEvxewo0wvsepUGqkuCJcKDO145Tc728nD79ACDECcp2NhwWtz953L3n"
+    configuration = leetcode.Configuration()
+    configuration.api_key["x-csrftoken"] = csrf_token
+    configuration.api_key["csrftoken"] = csrf_token
+    configuration.api_key["LEETCODE_SESSION"] = leetcode_session
+    configuration.api_key["Referer"] = "https://leetcode.com"
+    configuration.debug = False
+
+    
