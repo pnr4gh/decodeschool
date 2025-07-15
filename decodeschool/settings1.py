@@ -114,7 +114,7 @@ EMAIL_HOST = 'mail.supremecluster.com'
 EMAIL_USE_SSL = True
 EMAIL_PORT = 465
 EMAIL_HOST_USER = 'admin@decodeschool.com' 
-EMAIL_HOST_PASSWORD = 'PNR4email!!!'
+EMAIL_HOST_PASSWORD = ''
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
